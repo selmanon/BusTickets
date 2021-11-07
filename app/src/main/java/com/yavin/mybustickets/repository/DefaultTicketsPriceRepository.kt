@@ -8,8 +8,10 @@ import com.yavin.mybustickets.db.dao.TicketDao
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class DefaultTicketsPriceRepository(
+
+class DefaultTicketsPriceRepository @Inject constructor(
     private val defaultDispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val ticketDao: TicketDao
 ) : TicketsPriceRepository {

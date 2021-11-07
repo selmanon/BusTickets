@@ -10,9 +10,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 @HiltViewModel
-class TicketsViewModel(private val ticketPriceRepository : DefaultTicketsPriceRepository, application : Application) : AndroidViewModel(application) {
+class TicketsViewModel @Inject constructor(private val ticketPriceRepository : DefaultTicketsPriceRepository, application : Application) : AndroidViewModel(application) {
     var ticketsLiveData = MutableLiveData<List<TicketSolde>>()
     val ticketsUiStateLiveData = MutableLiveData<TicketsSoldUiState>()
 

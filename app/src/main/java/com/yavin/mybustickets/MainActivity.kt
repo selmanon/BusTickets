@@ -11,21 +11,20 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.yavin.mybustickets.viewmodel.FinishLoading
 import com.yavin.mybustickets.viewmodel.NoResultFound
 import com.yavin.mybustickets.viewmodel.StartLoading
 import com.yavin.mybustickets.viewmodel.TicketsViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    @Inject lateinit var ticketsViewModel: TicketsViewModel
+    val ticketsViewModel: TicketsViewModel by viewModels()
 
     private var ticketsSoldAdapter : TicketsSoldeAdapter = TicketsSoldeAdapter()
 
