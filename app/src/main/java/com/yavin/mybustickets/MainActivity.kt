@@ -14,6 +14,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yavin.mybustickets.viewmodel.FinishLoading
 import com.yavin.mybustickets.viewmodel.NoResultFound
@@ -45,6 +46,9 @@ class MainActivity : AppCompatActivity() {
 
         val recyclerView: RecyclerView = findViewById(R.id.ticketRecycleView)
         recyclerView.adapter = ticketsSoldAdapter
+
+        val layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = layoutManager
 
         observeTicketsUiState()
         observeTicketsData()
