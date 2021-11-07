@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -24,7 +25,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    val ticketsViewModel: TicketsViewModel by viewModels()
+    private val ticketsViewModel: TicketsViewModel by viewModels()
 
     private var ticketsSoldAdapter : TicketsSoldeAdapter = TicketsSoldeAdapter()
 
@@ -45,10 +46,10 @@ class MainActivity : AppCompatActivity() {
         val recyclerView: RecyclerView = findViewById(R.id.ticketRecycleView)
         recyclerView.adapter = ticketsSoldAdapter
 
-        ticketsViewModel.fetchTickets()
-
         observeTicketsUiState()
         observeTicketsData()
+
+        ticketsViewModel.fetchTickets()
     }
 
     private fun observeTicketsData() {
@@ -63,21 +64,21 @@ class MainActivity : AppCompatActivity() {
                 StartLoading -> {
                     findViewById<ProgressBar>(R.id.progressBar).visibility = View.VISIBLE
 
-                    findViewById<ProgressBar>(R.id.ticketRecycleView).visibility = View.GONE
-                    findViewById<ProgressBar>(R.id.textViewNoData).visibility = View.GONE
+                    findViewById<RecyclerView>(R.id.ticketRecycleView).visibility = View.GONE
+                    findViewById<TextView>(R.id.textViewNoData).visibility = View.GONE
 
                 }
                 FinishLoading -> {
-                    findViewById<ProgressBar>(R.id.ticketRecycleView).visibility = View.VISIBLE
+                    findViewById<RecyclerView>(R.id.ticketRecycleView).visibility = View.VISIBLE
 
                     findViewById<ProgressBar>(R.id.progressBar).visibility = View.GONE
-                    findViewById<ProgressBar>(R.id.textViewNoData).visibility = View.GONE
+                    findViewById<TextView>(R.id.textViewNoData).visibility = View.GONE
 
                 }
                 NoResultFound -> {
-                    findViewById<ProgressBar>(R.id.textViewNoData).visibility = View.VISIBLE
+                    findViewById<TextView>(R.id.textViewNoData).visibility = View.VISIBLE
 
-                    findViewById<ProgressBar>(R.id.ticketRecycleView).visibility = View.GONE
+                    findViewById<RecyclerView>(R.id.ticketRecycleView).visibility = View.GONE
                     findViewById<ProgressBar>(R.id.progressBar).visibility = View.GONE
                 }
             }

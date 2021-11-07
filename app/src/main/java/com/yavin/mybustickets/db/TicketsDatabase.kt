@@ -1,82 +1,38 @@
-package com.yavin.mybustickets
+package com.yavin.mybustickets.db
 
-import android.content.ContentValues
 import android.content.Context
 import androidx.room.Room
 
 import androidx.room.RoomDatabase
 
-
 import androidx.room.Database
-import androidx.room.OnConflictStrategy
-import androidx.sqlite.db.SupportSQLiteDatabase
 import com.yavin.mybustickets.db.dao.TicketDao
 import com.yavin.mybustickets.db.entities.TicketEntity
 
 
-@Database(entities = [TicketEntity::class], version = 1)
-abstract class TicketSoldRoomDatabase : RoomDatabase() {
+@Database(entities = [TicketEntity::class], version = 1, exportSchema = true)
+abstract class BusTicketDatabase : RoomDatabase() {
     abstract fun ticketSoldDao(): TicketDao
 
     companion object {
-        private lateinit var INSTANCE: TicketSoldRoomDatabase
-        fun getDatabase(context: Context): TicketSoldRoomDatabase {
+        private const val DATABASE = "bustickets.db"
+        private var INSTANCE: BusTicketDatabase? = null
+        private val lock = Any()
+
+        fun getInstance(context: Context): BusTicketDatabase {
             if (INSTANCE == null) {
-                synchronized(TicketSoldRoomDatabase::class.java) {
+                synchronized(lock) {
                     if (INSTANCE == null) {
                         INSTANCE = Room.databaseBuilder(
                             context.applicationContext,
-                            TicketSoldRoomDatabase::class.java, "TicketSold_database"
-                        )
-                            .fallbackToDestructiveMigration()
-                            .addCallback(object : RoomDatabase.Callback() {
-                                override fun onCreate(db: SupportSQLiteDatabase) {
-                                    super.onCreate(db)
-                                    tickets.forEach {
-                                        val ticket = ContentValues().apply {
-                                            put(it.uid.toString(), it.uid)
-                                            put(it.ticketLabel.toString(), it.ticketLabel)
-                                            put(it.ticketPrice.toString(), it.ticketPrice)
-                                        }
-
-                                        db.insert(
-                                            TicketEntity::class.simpleName,
-                                            OnConflictStrategy.REPLACE,
-                                            ticket
-                                        )
-                                    }
-                                }
-                            })
-                            .build()
+                            BusTicketDatabase::class.java, DATABASE
+                        ).createFromAsset("database/bustickets.db").build()
                     }
+                    return INSTANCE as BusTicketDatabase
                 }
             }
-            return INSTANCE
+            return INSTANCE as BusTicketDatabase
         }
-
-        val tickets: List<TicketEntity>
-            get() =
-                listOf(
-                    TicketEntity(
-                        uid = 1,
-                        ticketLabel = "Single Journey",
-                        ticketPrice = 110
-                    ),
-                    TicketEntity(
-                        uid = 2,
-                        ticketLabel = "Day",
-                        ticketPrice = 250
-                    ),
-                    TicketEntity(
-                        uid = 3,
-                        ticketLabel = "Week",
-                        ticketPrice = 1200
-                    )
-                )
     }
+
 }
-
-
-
-
-

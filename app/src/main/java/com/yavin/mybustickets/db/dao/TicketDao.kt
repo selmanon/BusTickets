@@ -8,5 +8,5 @@ import com.yavin.mybustickets.db.entities.TicketEntity
 @Dao
 interface TicketDao {
     @Query("SELECT * FROM TicketEntity")
-    fun loadTickets(): LiveData<List<TicketEntity>>
+    suspend fun loadTickets(): List<TicketEntity>
 }
