@@ -6,7 +6,9 @@ import android.content.ComponentName
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -31,6 +33,8 @@ class MainActivity : AppCompatActivity() {
 
     private var ticketsSoldAdapter : TicketsSoldeAdapter = TicketsSoldeAdapter()
 
+    private val ticketPriceAndItems : MutableMap<Int, Int> = mutableMapOf()
+
     private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             result: ActivityResult ->
         if (result.resultCode == Activity.RESULT_OK) {
@@ -45,11 +49,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        findViewById<Button>(R.id.buttonPay).setOnClickListener {
+            val totalAmount = calculateTotalAmount()
+            Log.i("totalAmount", totalAmount.toString())
+            doPayment(totalAmount)
+        }
+
         val recyclerView: RecyclerView = findViewById(R.id.ticketRecycleView)
         recyclerView.adapter = ticketsSoldAdapter
 
-        ticketsSoldAdapter.onItemClick = {
-            doPayment(it.ticketPrice)
+        ticketsSoldAdapter.onItemsCountChanged = {
+            ticketPriceAndItems[it.ticketSolde.ticketPrice] = it.items
         }
 
         val layoutManager = LinearLayoutManager(this)
@@ -59,6 +69,14 @@ class MainActivity : AppCompatActivity() {
         observeTicketsData()
 
         ticketsViewModel.fetchTickets()
+    }
+
+    private fun calculateTotalAmount(): Int {
+        var totalAmount = 0
+        for ((price, items) in ticketPriceAndItems) {
+            totalAmount += price * items
+        }
+        return totalAmount
     }
 
     private fun observeTicketsData() {
