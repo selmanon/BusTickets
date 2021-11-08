@@ -10,6 +10,8 @@ import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.RecyclerView
 import com.yavin.mybustickets.R
 import com.yavin.mybustickets.TicketSolde
+import java.text.NumberFormat
+import java.util.*
 
 class TicketsSoldeAdapter : RecyclerView.Adapter<TicketsSoldeAdapter.TicketViewHolder>() {
     var onItemsCountChanged: ((TicketPriceAndItems) -> Unit)? = null
@@ -36,7 +38,7 @@ class TicketsSoldeAdapter : RecyclerView.Adapter<TicketsSoldeAdapter.TicketViewH
 
     override fun onBindViewHolder(viewHolder: TicketViewHolder, position: Int) {
         viewHolder.ticketLibel.text = tickets[position].ticketLabel
-        viewHolder.ticketPrice.text = tickets[position].ticketPrice.toString()
+        viewHolder.ticketPrice.text = formatPrice(tickets[position].ticketPrice)
     }
 
     override fun getItemCount(): Int = tickets.size
@@ -45,6 +47,13 @@ class TicketsSoldeAdapter : RecyclerView.Adapter<TicketsSoldeAdapter.TicketViewH
         tickets.clear()
         tickets.addAll(newData)
         notifyDataSetChanged()
+    }
+
+    private fun formatPrice(price: Int): String {
+        val formatter: NumberFormat = NumberFormat.getCurrencyInstance()
+        formatter.currency = Currency.getInstance("EUR")
+        formatter.maximumFractionDigits = 2
+        return formatter.format(price/100)
     }
 
     data class TicketPriceAndItems(val ticketSolde: TicketSolde, val items : Int)
