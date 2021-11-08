@@ -1,4 +1,4 @@
-package com.yavin.mybustickets
+package com.yavin.mybustickets.ui
 
 import android.app.Activity
 import android.content.ActivityNotFoundException
@@ -16,6 +16,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.yavin.mybustickets.R
 import com.yavin.mybustickets.viewmodel.FinishLoading
 import com.yavin.mybustickets.viewmodel.NoResultFound
 import com.yavin.mybustickets.viewmodel.StartLoading
@@ -46,6 +47,10 @@ class MainActivity : AppCompatActivity() {
 
         val recyclerView: RecyclerView = findViewById(R.id.ticketRecycleView)
         recyclerView.adapter = ticketsSoldAdapter
+
+        ticketsSoldAdapter.onItemClick = {
+            doPayment(it.ticketPrice)
+        }
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
@@ -89,14 +94,14 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun doPayment() {
+    private fun doPayment(ticketPrice: Int) {
         try {
             val intent = Intent()
-            val cn = ComponentName.createRelative("com.yavin.macewindu", ".WelcomeActivity")
+            val cn = ComponentName.createRelative("com.yavin.macewindu", ".PaymentActivity")
 
             intent.component = cn
 
-            intent.putExtra("amount", "100")
+            intent.putExtra("amount", ticketPrice.toString())
             intent.putExtra("cartId", "178238")
             intent.putExtra("vendorToken", "busTicket")
             intent.putExtra("reference", "872")
