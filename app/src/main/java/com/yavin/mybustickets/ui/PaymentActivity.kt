@@ -27,7 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class PaymentActivity : AppCompatActivity() {
 
     private val ticketsViewModel: TicketsViewModel by viewModels()
 
