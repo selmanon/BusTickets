@@ -53,7 +53,7 @@ class TicketsSoldeAdapter : RecyclerView.Adapter<TicketsSoldeAdapter.TicketViewH
         val formatter: NumberFormat = NumberFormat.getCurrencyInstance()
         formatter.currency = Currency.getInstance("EUR")
         formatter.maximumFractionDigits = 2
-        return formatter.format(price/100)
+        return formatter.format(price/100.00)
     }
 
     data class TicketPriceAndItems(val ticketSolde: TicketSolde, val items : Int)
