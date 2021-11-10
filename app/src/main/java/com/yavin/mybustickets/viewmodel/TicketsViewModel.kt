@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yavin.mybustickets.TicketSolde
 import com.yavin.mybustickets.repository.DefaultTicketsPriceRepository
+import com.yavin.mybustickets.repository.TicketsPriceRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
