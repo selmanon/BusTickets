@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.yavin.mybustickets.db.BusTicketDatabase
 import com.yavin.mybustickets.db.dao.TicketDao
+import com.yavin.mybustickets.db.dao.TransactionDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,5 +25,11 @@ object RoomModule {
     @Provides
     fun provideTicketDao(ticketsDatabase: BusTicketDatabase): TicketDao {
         return ticketsDatabase.ticketSoldDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideTransactionDao(ticketsDatabase: BusTicketDatabase): TransactionDao {
+        return ticketsDatabase.transactionDao()
     }
 }

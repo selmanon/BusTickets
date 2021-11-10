@@ -7,12 +7,16 @@ import androidx.room.RoomDatabase
 
 import androidx.room.Database
 import com.yavin.mybustickets.db.dao.TicketDao
+import com.yavin.mybustickets.db.dao.TransactionDao
 import com.yavin.mybustickets.db.entities.TicketEntity
+import com.yavin.mybustickets.db.entities.TransactionEntity
 
 
-@Database(entities = [TicketEntity::class], version = 1, exportSchema = true)
+@Database(entities = [TicketEntity::class,TransactionEntity::class], version = 1, exportSchema = true)
 abstract class BusTicketDatabase : RoomDatabase() {
     abstract fun ticketSoldDao(): TicketDao
+
+    abstract fun transactionDao(): TransactionDao
 
     companion object {
         private const val DATABASE = "bustickets.db"

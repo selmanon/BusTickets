@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yavin.mybustickets.R
 import com.yavin.mybustickets.ui.settings.SettingTicketPriceActivity
+import com.yavin.mybustickets.ui.transaction.TransactionActivity
 import com.yavin.mybustickets.viewmodel.FinishLoading
 import com.yavin.mybustickets.viewmodel.NoResultFound
 import com.yavin.mybustickets.viewmodel.StartLoading
@@ -153,8 +154,8 @@ class PaymentActivity : AppCompatActivity() {
                 true
             }
             R.id.history -> {
-                //val intent = Intent(this, TransactionsActivity::class.java)
-                //startActivity(intent)
+                val intent = Intent(this, TransactionActivity::class.java)
+                startActivity(intent)
                 true
             }
             else -> super.onOptionsItemSelected(item)
