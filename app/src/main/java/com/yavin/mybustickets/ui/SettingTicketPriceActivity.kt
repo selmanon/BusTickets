@@ -67,7 +67,7 @@ class SettingTicketPriceActivity : AppCompatActivity() {
             singlePrice = it.items
         }
 
-        ticketsSoldAdapter.onDayPriceChangedChanged = {
+        ticketsSoldAdapter.onWeekPriceChangedChanged = {
             weekPrice = it.items
         }
 
