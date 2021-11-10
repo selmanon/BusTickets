@@ -2,15 +2,16 @@ package com.yavin.mybustickets.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.yavin.mybustickets.data.TicketDomain
-import com.yavin.mybustickets.repository.DefaultTicketsPriceRepository
+import com.yavin.mybustickets.data.TicketType
+import com.yavin.mybustickets.data.repository.TicketsRepository
 import com.yavin.mybustickets.rule.CoroutineTestRule
-import io.mockk.MockKAnnotations
 import io.mockk.coEvery
-import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.Mock
+import org.mockito.MockitoAnnotations
 
 @ExperimentalCoroutinesApi
 class TicketsViewModelTest {
@@ -23,18 +24,18 @@ class TicketsViewModelTest {
 
     private lateinit var tickets: ArrayList<TicketDomain>
 
-    @MockK
-    private lateinit var ticketsRepository: DefaultTicketsPriceRepository
+    @Mock
+    private lateinit var ticketsRepository: TicketsRepository
 
-    private lateinit var cut : TicketsViewModel
+    private lateinit var cut: TicketsViewModel
 
     @Before
     fun setUp() {
-        MockKAnnotations.init(this)
+        MockitoAnnotations.initMocks(this)
 
         cut = TicketsViewModel(ticketsRepository)
 
-        tickets = arrayListOf(TicketDomain("SINGLE", 100))
+        tickets = arrayListOf(TicketDomain(TicketType.SINGLE, 100))
     }
 
     @Test

@@ -4,7 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yavin.mybustickets.data.TicketDomain
-import com.yavin.mybustickets.repository.DefaultTicketsPriceRepository
+import com.yavin.mybustickets.data.repository.DefaultTicketsRepository
+import com.yavin.mybustickets.data.repository.TicketsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -12,7 +13,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class TicketsViewModel @Inject constructor(private val ticketPriceRepository : DefaultTicketsPriceRepository) : ViewModel() {
+class TicketsViewModel @Inject constructor(private val ticketPriceRepository : TicketsRepository) : ViewModel() {
     var ticketsLiveData = MutableLiveData<List<TicketDomain>>()
     val ticketsUiStateLiveData = MutableLiveData<TicketsSoldUiState>()
 

@@ -16,13 +16,13 @@ import javax.inject.Singleton
 object RoomModule {
     @Singleton
     @Provides
-    fun providePostsDatabase(@ApplicationContext context: Context): BusTicketDatabase {
+    fun provideTicketDatabase(@ApplicationContext context: Context): BusTicketDatabase {
         return BusTicketDatabase.getInstance(context)
     }
 
     @Singleton
     @Provides
-    fun providePostsDao(ticketsDatabase: BusTicketDatabase): TicketDao {
+    fun provideTicketDao(ticketsDatabase: BusTicketDatabase): TicketDao {
         return ticketsDatabase.ticketSoldDao()
     }
 }

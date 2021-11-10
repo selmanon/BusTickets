@@ -1,4 +1,4 @@
-package com.yavin.mybustickets.repository
+package com.yavin.mybustickets.data.repository
 
 import com.yavin.mybustickets.data.TicketDomain
 import com.yavin.mybustickets.data.TicketType
@@ -9,10 +9,10 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
-class DefaultTicketsPriceRepository @Inject constructor(
+class DefaultTicketsRepository @Inject constructor(
     @IoDispatcher val defaultDispatcher: CoroutineDispatcher,
     private val ticketDao: TicketDao
-) : TicketsPriceRepository {
+) : TicketsRepository {
 
 
     override suspend fun getTickets(): List<TicketDomain> {

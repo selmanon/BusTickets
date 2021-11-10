@@ -1,8 +1,8 @@
 package com.yavin.mybustickets.di
 
 import com.yavin.mybustickets.db.dao.TicketDao
-import com.yavin.mybustickets.repository.DefaultTicketsPriceRepository
-import com.yavin.mybustickets.repository.TicketsPriceRepository
+import com.yavin.mybustickets.data.repository.DefaultTicketsRepository
+import com.yavin.mybustickets.data.repository.TicketsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,9 +16,9 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun provideTicketsRepository(
-        dispatcher : CoroutineDispatcher,
+        @IoDispatcher dispatcher : CoroutineDispatcher,
         ticketDao: TicketDao
-    ) = DefaultTicketsPriceRepository(
-        dispatcher, ticketDao) as TicketsPriceRepository
+    ) = DefaultTicketsRepository(
+        dispatcher, ticketDao) as TicketsRepository
 
 }

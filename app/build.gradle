@@ -70,4 +70,17 @@ dependencies {
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_viewmodels"
     kapt "androidx.hilt:hilt-compiler:$hilt_viewmodels"
 
+    //Mockito
+    testImplementation ("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
+
+    // LiveData
+    testImplementation 'com.jraska.livedata:testing-ktx:1.2.0'
+
+    testImplementation 'androidx.arch.core:core-testing:2.1.0'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1'
+
+    testImplementation "io.mockk:mockk:1.12.0"
+
+    kaptTest 'com.google.dagger:hilt-android-compiler:2.38.1'
+
 }
