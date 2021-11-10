@@ -1,4 +1,4 @@
-package com.yavin.mybustickets.ui
+package com.yavin.mybustickets.ui.payment
 
 import android.app.Activity
 import android.content.ActivityNotFoundException
@@ -22,6 +22,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yavin.mybustickets.R
+import com.yavin.mybustickets.ui.settings.SettingTicketPriceActivity
 import com.yavin.mybustickets.viewmodel.FinishLoading
 import com.yavin.mybustickets.viewmodel.NoResultFound
 import com.yavin.mybustickets.viewmodel.StartLoading

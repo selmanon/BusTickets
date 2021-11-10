@@ -1,7 +1,6 @@
-package com.yavin.mybustickets.ui
+package com.yavin.mybustickets.ui.settings
 
 import android.app.Activity
-import android.content.ComponentName
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,7 +9,6 @@ import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -18,6 +16,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yavin.mybustickets.R
+import com.yavin.mybustickets.ui.payment.PaymentActivity
 import com.yavin.mybustickets.viewmodel.FinishLoading
 import com.yavin.mybustickets.viewmodel.NoResultFound
 import com.yavin.mybustickets.viewmodel.StartLoading

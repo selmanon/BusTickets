@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BusTickets">
         <activity
-            android:name=".ui.PaymentActivity"
+            android:name=".ui.payment.PaymentActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +21,7 @@
         </activity>
 
         <activity
-            android:name=".ui.SettingTicketPriceActivity"
+            android:name=".ui.settings.SettingTicketPriceActivity"
             android:exported="true">
         </activity>
     </application>
