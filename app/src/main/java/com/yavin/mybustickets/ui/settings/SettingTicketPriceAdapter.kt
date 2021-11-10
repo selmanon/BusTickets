@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.RecyclerView
 import com.yavin.mybustickets.R
-import com.yavin.mybustickets.TicketSolde
+import com.yavin.mybustickets.data.TicketSolde
 import java.text.NumberFormat
 import java.util.*
 

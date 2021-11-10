@@ -1,6 +1,6 @@
 package com.yavin.mybustickets.repository
 
-import com.yavin.mybustickets.TicketSolde
+import com.yavin.mybustickets.data.TicketSolde
 import com.yavin.mybustickets.db.dao.TicketDao
 import com.yavin.mybustickets.di.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher

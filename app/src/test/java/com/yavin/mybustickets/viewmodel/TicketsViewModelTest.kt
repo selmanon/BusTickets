@@ -1,13 +1,12 @@
 package com.yavin.mybustickets.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.yavin.mybustickets.TicketSolde
+import com.yavin.mybustickets.data.TicketSolde
 import com.yavin.mybustickets.repository.TicketsPriceRepository
 import com.yavin.mybustickets.rule.CoroutineTestRule
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Rule

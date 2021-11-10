@@ -1,6 +1,6 @@
 package com.yavin.mybustickets.repository
 
-import com.yavin.mybustickets.TicketSolde
+import com.yavin.mybustickets.data.TicketSolde
 
 interface TicketsPriceRepository {
     suspend fun getTickets() : List<TicketSolde>
