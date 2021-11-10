@@ -8,8 +8,10 @@ import android.widget.TextView
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.RecyclerView
 import com.yavin.mybustickets.R
-import com.yavin.mybustickets.data.TicketSolde
+import com.yavin.mybustickets.data.TicketDomain
+import com.yavin.mybustickets.data.TicketType
 import java.text.NumberFormat
+import java.time.DayOfWeek
 import java.util.*
 
 class SettingTicketPriceAdapter : RecyclerView.Adapter<SettingTicketPriceAdapter.TicketViewHolder>() {
@@ -17,7 +19,7 @@ class SettingTicketPriceAdapter : RecyclerView.Adapter<SettingTicketPriceAdapter
     var onSinglePriceChangedChanged: ((TicketPriceAndItems) -> Unit)? = null
     var onWeekPriceChangedChanged: ((TicketPriceAndItems) -> Unit)? = null
 
-    var tickets = mutableListOf<TicketSolde>()
+    var tickets = mutableListOf<TicketDomain>()
 
     inner class TicketViewHolder(view : View) : RecyclerView.ViewHolder(view) {
         val ticketLibel : TextView = view.findViewById(R.id.textViewTicketLibel)
@@ -26,13 +28,13 @@ class SettingTicketPriceAdapter : RecyclerView.Adapter<SettingTicketPriceAdapter
 
         init {
             items.doOnTextChanged { text, start, before, count ->
-                if(tickets[adapterPosition].ticketLabel == "Day") {
+                if(tickets[adapterPosition].ticketLabel == TicketType.DAY) {
                     onDayPriceChangedChanged?.invoke(TicketPriceAndItems(tickets[adapterPosition], text.toString().toInt()))
                 }
-                if(tickets[adapterPosition].ticketLabel == "Single") {
+                if(tickets[adapterPosition].ticketLabel == TicketType.SINGLE) {
                     onSinglePriceChangedChanged?.invoke(TicketPriceAndItems(tickets[adapterPosition], text.toString().toInt()))
                 }
-                if(tickets[adapterPosition].ticketLabel == "Week") {
+                if(tickets[adapterPosition].ticketLabel == TicketType.WEEK) {
                     onWeekPriceChangedChanged?.invoke(TicketPriceAndItems(tickets[adapterPosition], text.toString().toInt()))
                 }
             }
@@ -47,13 +49,13 @@ class SettingTicketPriceAdapter : RecyclerView.Adapter<SettingTicketPriceAdapter
     }
 
     override fun onBindViewHolder(viewHolder: TicketViewHolder, position: Int) {
-        viewHolder.ticketLibel.text = tickets[position].ticketLabel
+        viewHolder.ticketLibel.text = tickets[position].ticketLabel.type
         viewHolder.ticketPrice.text = formatPrice(tickets[position].ticketPrice)
     }
 
     override fun getItemCount(): Int = tickets.size
 
-    fun updateData(newData: List<TicketSolde>) {
+    fun updateData(newData: List<TicketDomain>) {
         tickets.clear()
         tickets.addAll(newData)
         notifyDataSetChanged()
@@ -66,5 +68,5 @@ class SettingTicketPriceAdapter : RecyclerView.Adapter<SettingTicketPriceAdapter
         return formatter.format(price/100.00)
     }
 
-    data class TicketPriceAndItems(val ticketSolde: TicketSolde, val items : Int)
+    data class TicketPriceAndItems(val ticketDomain: TicketDomain, val items : Int)
 }

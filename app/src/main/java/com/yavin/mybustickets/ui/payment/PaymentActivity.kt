@@ -66,13 +66,13 @@ class PaymentActivity : AppCompatActivity() {
         recyclerView.adapter = ticketsSoldAdapter
 
         ticketsSoldAdapter.onDayItemsCountChanged = {
-            dayPriceForQuantity = it.items * it.ticketSolde.ticketPrice
+            dayPriceForQuantity = it.items * it.ticketDomain.ticketPrice
         }
         ticketsSoldAdapter.onSingleItemsCountChanged = {
-            singlePriceForQuantity = it.items * it.ticketSolde.ticketPrice
+            singlePriceForQuantity = it.items * it.ticketDomain.ticketPrice
         }
         ticketsSoldAdapter.onWeekItemsCountChanged = {
-            weekPriceForQuantity = it.items * it.ticketSolde.ticketPrice
+            weekPriceForQuantity = it.items * it.ticketDomain.ticketPrice
         }
 
         val layoutManager = LinearLayoutManager(this)

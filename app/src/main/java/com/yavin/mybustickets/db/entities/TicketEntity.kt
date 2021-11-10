@@ -9,7 +9,7 @@ data class TicketEntity(
     @PrimaryKey(autoGenerate = true)
     val uid: Int = 0,
     @ColumnInfo(name = "ticketLabel")
-    val ticketLabel: String? = null,
+    val ticketLabel: String,
     @ColumnInfo(name = "ticketPrice")
-    val ticketPrice: Int? = null
+    val ticketPrice: Int
 )

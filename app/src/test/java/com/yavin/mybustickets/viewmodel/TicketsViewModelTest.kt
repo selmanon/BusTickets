@@ -1,8 +1,8 @@
 package com.yavin.mybustickets.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.yavin.mybustickets.data.TicketSolde
-import com.yavin.mybustickets.repository.TicketsPriceRepository
+import com.yavin.mybustickets.data.TicketDomain
+import com.yavin.mybustickets.repository.DefaultTicketsPriceRepository
 import com.yavin.mybustickets.rule.CoroutineTestRule
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -21,10 +21,10 @@ class TicketsViewModelTest {
     @get:Rule
     val coroutinesDispatcherRule = CoroutineTestRule()
 
-    private lateinit var tickets: ArrayList<TicketSolde>
+    private lateinit var tickets: ArrayList<TicketDomain>
 
     @MockK
-    private lateinit var ticketsRepository: TicketsPriceRepository
+    private lateinit var ticketsRepository: DefaultTicketsPriceRepository
 
     private lateinit var cut : TicketsViewModel
 
@@ -34,7 +34,7 @@ class TicketsViewModelTest {
 
         cut = TicketsViewModel(ticketsRepository)
 
-        tickets = arrayListOf(TicketSolde("SINGLE", 100))
+        tickets = arrayListOf(TicketDomain("SINGLE", 100))
     }
 
     @Test
