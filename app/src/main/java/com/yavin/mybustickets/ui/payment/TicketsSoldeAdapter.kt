@@ -1,4 +1,4 @@
-package com.yavin.mybustickets.ui
+package com.yavin.mybustickets.ui.payment
 
 import android.view.LayoutInflater
 import android.view.View
