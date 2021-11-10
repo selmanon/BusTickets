@@ -29,4 +29,10 @@ class DefaultTicketsPriceRepository @Inject constructor(
 
         return tickets
     }
+
+    suspend fun setPrice(type: String, price: Int)  {
+        withContext(defaultDispatcher) {
+            ticketDao.setTicketPrice(type, price)
+        }
+    }
 }

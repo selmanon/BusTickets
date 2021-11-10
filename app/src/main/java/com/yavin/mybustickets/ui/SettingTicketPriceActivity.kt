@@ -1,15 +1,11 @@
 package com.yavin.mybustickets.ui
 
 import android.app.Activity
-import android.content.ActivityNotFoundException
 import android.content.ComponentName
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
@@ -30,13 +26,13 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class PaymentActivity : AppCompatActivity() {
+class SettingTicketPriceActivity : AppCompatActivity() {
 
     private val ticketsViewModel: TicketsViewModel by viewModels()
 
-    private var ticketsSoldAdapter : TicketsSoldeAdapter = TicketsSoldeAdapter()
+    private var ticketsSoldAdapter = SettingTicketPriceAdapter()
 
-    private val ticketPriceAndItems : MutableMap<Int, Int> = mutableMapOf()
+    private var dayPrice : Int? = null
 
     private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             result: ActivityResult ->
@@ -50,19 +46,19 @@ class PaymentActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_settings_main)
 
-        findViewById<Button>(R.id.buttonPay).setOnClickListener {
-            val totalAmount = calculateTotalAmount()
-            Log.i("totalAmount", totalAmount.toString())
-            doPayment(totalAmount)
+        findViewById<Button>(R.id.buttonSave).setOnClickListener {
+            Log.i("day new price", dayPrice.toString())
+            saveNewPrice()
+            relaunchPayment()
         }
 
         val recyclerView: RecyclerView = findViewById(R.id.ticketRecycleView)
         recyclerView.adapter = ticketsSoldAdapter
 
-        ticketsSoldAdapter.onItemsCountChanged = {
-            ticketPriceAndItems[it.ticketSolde.ticketPrice] = it.items
+        ticketsSoldAdapter.onDayPriceChangedChanged = {
+            dayPrice = it.items
         }
 
         val layoutManager = LinearLayoutManager(this)
@@ -74,12 +70,13 @@ class PaymentActivity : AppCompatActivity() {
         ticketsViewModel.fetchTickets()
     }
 
-    private fun calculateTotalAmount(): Int {
-        var totalAmount = 0
-        for ((price, items) in ticketPriceAndItems) {
-            totalAmount += price * items
-        }
-        return totalAmount
+    private fun relaunchPayment() {
+        val intent = Intent(this, PaymentActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun saveNewPrice() {
+        dayPrice?.let { ticketsViewModel.saveTicketsNewPrice("Day", it*100) }
     }
 
     private fun observeTicketsData() {
@@ -113,46 +110,6 @@ class PaymentActivity : AppCompatActivity() {
                 }
             }
         })
-    }
-
-    private fun doPayment(ticketPrice: Int) {
-        try {
-            val intent = Intent()
-            val cn = ComponentName.createRelative("com.yavin.macewindu", ".PaymentActivity")
-
-            intent.component = cn
-
-            intent.putExtra("amount", ticketPrice.toString())
-            intent.putExtra("cartId", "178238")
-            intent.putExtra("vendorToken", "busTicket")
-            intent.putExtra("reference", "872")
-
-            startForResult.launch(intent)
-        } catch (e: ActivityNotFoundException) {
-            Toast.makeText(this, "Yavin PaymentActivity not found", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.options, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.options -> {
-                val intent = Intent(this, SettingTicketPriceActivity::class.java)
-                startActivity(intent)
-                true
-            }
-            R.id.history -> {
-                //val intent = Intent(this, TransactionsActivity::class.java)
-                //startActivity(intent)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
 

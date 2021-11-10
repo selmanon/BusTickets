@@ -33,4 +33,9 @@ class TicketsViewModel @Inject constructor(private val ticketPriceRepository : D
         }
     }
 
-}
+    fun saveTicketsNewPrice(type : String, price : Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+                ticketPriceRepository.setPrice(type, price)
+            }
+        }
+    }
