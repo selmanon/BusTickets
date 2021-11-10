@@ -33,6 +33,8 @@ class SettingTicketPriceActivity : AppCompatActivity() {
     private var ticketsSoldAdapter = SettingTicketPriceAdapter()
 
     private var dayPrice : Int? = null
+    private var singlePrice : Int? = null
+    private var weekPrice : Int? = null
 
     private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             result: ActivityResult ->
@@ -61,6 +63,14 @@ class SettingTicketPriceActivity : AppCompatActivity() {
             dayPrice = it.items
         }
 
+        ticketsSoldAdapter.onSinglePriceChangedChanged = {
+            singlePrice = it.items
+        }
+
+        ticketsSoldAdapter.onDayPriceChangedChanged = {
+            weekPrice = it.items
+        }
+
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
 
@@ -77,6 +87,8 @@ class SettingTicketPriceActivity : AppCompatActivity() {
 
     private fun saveNewPrice() {
         dayPrice?.let { ticketsViewModel.saveTicketsNewPrice("Day", it*100) }
+        singlePrice?.let { ticketsViewModel.saveTicketsNewPrice("Single", it*100) }
+        weekPrice?.let { ticketsViewModel.saveTicketsNewPrice("Week", it*100) }
     }
 
     private fun observeTicketsData() {

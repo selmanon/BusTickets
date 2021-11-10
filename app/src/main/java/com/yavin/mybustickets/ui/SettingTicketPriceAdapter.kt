@@ -14,6 +14,9 @@ import java.util.*
 
 class SettingTicketPriceAdapter : RecyclerView.Adapter<SettingTicketPriceAdapter.TicketViewHolder>() {
     var onDayPriceChangedChanged: ((TicketPriceAndItems) -> Unit)? = null
+    var onSinglePriceChangedChanged: ((TicketPriceAndItems) -> Unit)? = null
+    var onWeekPriceChangedChanged: ((TicketPriceAndItems) -> Unit)? = null
+
     var tickets = mutableListOf<TicketSolde>()
 
     inner class TicketViewHolder(view : View) : RecyclerView.ViewHolder(view) {
@@ -25,6 +28,12 @@ class SettingTicketPriceAdapter : RecyclerView.Adapter<SettingTicketPriceAdapter
             items.doOnTextChanged { text, start, before, count ->
                 if(tickets[adapterPosition].ticketLabel == "Day") {
                     onDayPriceChangedChanged?.invoke(TicketPriceAndItems(tickets[adapterPosition], text.toString().toInt()))
+                }
+                if(tickets[adapterPosition].ticketLabel == "Single") {
+                    onSinglePriceChangedChanged?.invoke(TicketPriceAndItems(tickets[adapterPosition], text.toString().toInt()))
+                }
+                if(tickets[adapterPosition].ticketLabel == "Week") {
+                    onWeekPriceChangedChanged?.invoke(TicketPriceAndItems(tickets[adapterPosition], text.toString().toInt()))
                 }
             }
         }

@@ -3,7 +3,6 @@ package com.yavin.mybustickets.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.core.widget.doOnTextChanged
@@ -14,17 +13,43 @@ import java.text.NumberFormat
 import java.util.*
 
 class TicketsSoldeAdapter : RecyclerView.Adapter<TicketsSoldeAdapter.TicketViewHolder>() {
-    var onItemsCountChanged: ((TicketPriceAndItems) -> Unit)? = null
+    var onDayItemsCountChanged: ((TicketPriceAndItems) -> Unit)? = null
+    var onSingleItemsCountChanged: ((TicketPriceAndItems) -> Unit)? = null
+    var onWeekItemsCountChanged: ((TicketPriceAndItems) -> Unit)? = null
+
     var tickets = mutableListOf<TicketSolde>()
 
-    inner class TicketViewHolder(view : View) : RecyclerView.ViewHolder(view) {
-        val ticketLibel : TextView = view.findViewById(R.id.textViewTicketLibel)
-        val ticketPrice : TextView = view.findViewById(R.id.textViewTicketPrice)
-        val items : EditText = view.findViewById(R.id.editTextNumberOfItems)
+    inner class TicketViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val ticketLibel: TextView = view.findViewById(R.id.textViewTicketLibel)
+        val ticketPrice: TextView = view.findViewById(R.id.textViewTicketPrice)
+        val items: EditText = view.findViewById(R.id.editTextNumberOfItems)
 
         init {
             items.doOnTextChanged { text, start, before, count ->
-                onItemsCountChanged?.invoke(TicketPriceAndItems(tickets[adapterPosition], text.toString().toInt()))
+                if (tickets[adapterPosition].ticketLabel == "Day") {
+                    onDayItemsCountChanged?.invoke(
+                        TicketPriceAndItems(
+                            tickets[adapterPosition],
+                            text.toString().toInt()
+                        )
+                    )
+            }
+                if (tickets[adapterPosition].ticketLabel == "Single") {
+                    onSingleItemsCountChanged?.invoke(
+                        TicketPriceAndItems(
+                            tickets[adapterPosition],
+                            text.toString().toInt()
+                        )
+                    )
+                }
+                if (tickets[adapterPosition].ticketLabel == "Week") {
+                    onWeekItemsCountChanged?.invoke(
+                        TicketPriceAndItems(
+                            tickets[adapterPosition],
+                            text.toString().toInt()
+                        )
+                    )
+                }
             }
         }
     }
@@ -53,8 +78,8 @@ class TicketsSoldeAdapter : RecyclerView.Adapter<TicketsSoldeAdapter.TicketViewH
         val formatter: NumberFormat = NumberFormat.getCurrencyInstance()
         formatter.currency = Currency.getInstance("EUR")
         formatter.maximumFractionDigits = 2
-        return formatter.format(price/100.00)
+        return formatter.format(price / 100.00)
     }
 
-    data class TicketPriceAndItems(val ticketSolde: TicketSolde, val items : Int)
+    data class TicketPriceAndItems(val ticketSolde: TicketSolde, val items: Int)
 }

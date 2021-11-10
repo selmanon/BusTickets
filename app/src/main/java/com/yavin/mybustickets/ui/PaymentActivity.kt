@@ -34,18 +34,21 @@ class PaymentActivity : AppCompatActivity() {
 
     private val ticketsViewModel: TicketsViewModel by viewModels()
 
-    private var ticketsSoldAdapter : TicketsSoldeAdapter = TicketsSoldeAdapter()
+    private var ticketsSoldAdapter: TicketsSoldeAdapter = TicketsSoldeAdapter()
 
-    private val ticketPriceAndItems : MutableMap<Int, Int> = mutableMapOf()
+    private var dayPriceForQuantity: Int = 0
+    private var singlePriceForQuantity: Int = 0
+    private var weekPriceForQuantity: Int = 0
 
-    private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            result: ActivityResult ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val intent = result.data
-            // Handle the Intent
-            //do stuff here
+
+    private val startForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val intent = result.data
+                // Handle the Intent
+                //do stuff here
+            }
         }
-    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,8 +64,14 @@ class PaymentActivity : AppCompatActivity() {
         val recyclerView: RecyclerView = findViewById(R.id.ticketRecycleView)
         recyclerView.adapter = ticketsSoldAdapter
 
-        ticketsSoldAdapter.onItemsCountChanged = {
-            ticketPriceAndItems[it.ticketSolde.ticketPrice] = it.items
+        ticketsSoldAdapter.onDayItemsCountChanged = {
+            dayPriceForQuantity = it.items * it.ticketSolde.ticketPrice
+        }
+        ticketsSoldAdapter.onSingleItemsCountChanged = {
+            singlePriceForQuantity = it.items * it.ticketSolde.ticketPrice
+        }
+        ticketsSoldAdapter.onWeekItemsCountChanged = {
+            weekPriceForQuantity = it.items * it.ticketSolde.ticketPrice
         }
 
         val layoutManager = LinearLayoutManager(this)
@@ -75,11 +84,7 @@ class PaymentActivity : AppCompatActivity() {
     }
 
     private fun calculateTotalAmount(): Int {
-        var totalAmount = 0
-        for ((price, items) in ticketPriceAndItems) {
-            totalAmount += price * items
-        }
-        return totalAmount
+        return dayPriceForQuantity + singlePriceForQuantity + weekPriceForQuantity
     }
 
     private fun observeTicketsData() {
