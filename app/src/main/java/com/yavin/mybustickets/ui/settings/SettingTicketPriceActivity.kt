@@ -16,6 +16,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yavin.mybustickets.R
+import com.yavin.mybustickets.data.TicketType
 import com.yavin.mybustickets.ui.payment.PaymentActivity
 import com.yavin.mybustickets.viewmodel.FinishLoading
 import com.yavin.mybustickets.viewmodel.NoResultFound
@@ -85,9 +86,9 @@ class SettingTicketPriceActivity : AppCompatActivity() {
     }
 
     private fun saveNewPrice() {
-        dayPrice?.let { ticketsViewModel.saveTicketsNewPrice("Day", it*100) }
-        singlePrice?.let { ticketsViewModel.saveTicketsNewPrice("Single", it*100) }
-        weekPrice?.let { ticketsViewModel.saveTicketsNewPrice("Week", it*100) }
+        dayPrice?.let { ticketsViewModel.saveTicketsNewPrice(TicketType.DAY.type, it*100) }
+        singlePrice?.let { ticketsViewModel.saveTicketsNewPrice(TicketType.SINGLE.type, it*100) }
+        weekPrice?.let { ticketsViewModel.saveTicketsNewPrice(TicketType.WEEK.type, it*100) }
     }
 
     private fun observeTicketsData() {

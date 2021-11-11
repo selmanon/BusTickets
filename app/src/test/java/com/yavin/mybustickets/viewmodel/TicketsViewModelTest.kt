@@ -3,15 +3,15 @@ package com.yavin.mybustickets.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.yavin.mybustickets.data.TicketDomain
 import com.yavin.mybustickets.data.TicketType
-import com.yavin.mybustickets.data.repository.TicketsRepository
+import com.yavin.mybustickets.data.repository.DefaultTicketsRepository
 import com.yavin.mybustickets.rule.CoroutineTestRule
+import io.mockk.MockKAnnotations
 import io.mockk.coEvery
+import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.Mock
-import org.mockito.MockitoAnnotations
 
 @ExperimentalCoroutinesApi
 class TicketsViewModelTest {
@@ -24,14 +24,14 @@ class TicketsViewModelTest {
 
     private lateinit var tickets: ArrayList<TicketDomain>
 
-    @Mock
-    private lateinit var ticketsRepository: TicketsRepository
+    @MockK
+    private lateinit var ticketsRepository: DefaultTicketsRepository
 
     private lateinit var cut: TicketsViewModel
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockKAnnotations.init(this)
 
         cut = TicketsViewModel(ticketsRepository)
 
