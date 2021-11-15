@@ -1,4 +1,4 @@
-package com.yavin.mybustickets.data
+package com.yavin.mybustickets.domaine
 
 enum class TicketType(val type:String) {
     SINGLE("SINGLE"),

@@ -3,16 +3,11 @@ package com.yavin.mybustickets.ui.transaction
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.TextView
-import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.RecyclerView
 import com.yavin.mybustickets.R
-import com.yavin.mybustickets.data.TicketDomain
-import com.yavin.mybustickets.data.TicketType
-import com.yavin.mybustickets.data.TransactionDomain
+import com.yavin.mybustickets.domaine.TransactionDomain
 import java.text.NumberFormat
-import java.text.SimpleDateFormat
 import java.util.*
 
 class TransactionAdapter : RecyclerView.Adapter<TransactionAdapter.TransactionViewHolder>() {

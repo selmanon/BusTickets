@@ -1,6 +1,6 @@
-package com.yavin.mybustickets.data.repository
+package com.yavin.mybustickets.domaine.repository
 
-import com.yavin.mybustickets.data.TicketDomain
+import com.yavin.mybustickets.domaine.TicketDomain
 
 interface TicketsRepository {
     suspend fun getTickets() : List<TicketDomain>

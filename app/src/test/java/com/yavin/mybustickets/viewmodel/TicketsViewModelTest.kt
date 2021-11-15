@@ -1,9 +1,9 @@
 package com.yavin.mybustickets.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.yavin.mybustickets.data.TicketDomain
-import com.yavin.mybustickets.data.TicketType
-import com.yavin.mybustickets.data.repository.DefaultTicketsRepository
+import com.yavin.mybustickets.domaine.TicketDomain
+import com.yavin.mybustickets.domaine.TicketType
+import com.yavin.mybustickets.domaine.repository.DefaultTicketsRepository
 import com.yavin.mybustickets.rule.CoroutineTestRule
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery

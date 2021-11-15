@@ -1,10 +1,10 @@
 package com.yavin.mybustickets.di
 
 import com.yavin.mybustickets.db.dao.TicketDao
-import com.yavin.mybustickets.data.repository.DefaultTicketsRepository
-import com.yavin.mybustickets.data.repository.DefaultTransactionRepository
-import com.yavin.mybustickets.data.repository.TicketsRepository
-import com.yavin.mybustickets.data.repository.TransactionRepository
+import com.yavin.mybustickets.domaine.repository.DefaultTicketsRepository
+import com.yavin.mybustickets.domaine.repository.DefaultTransactionRepository
+import com.yavin.mybustickets.domaine.repository.TicketsRepository
+import com.yavin.mybustickets.domaine.repository.TransactionRepository
 import com.yavin.mybustickets.db.dao.TransactionDao
 import dagger.Module
 import dagger.Provides

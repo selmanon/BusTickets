@@ -16,7 +16,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yavin.mybustickets.R
-import com.yavin.mybustickets.data.TicketType
+import com.yavin.mybustickets.domaine.TicketType
 import com.yavin.mybustickets.ui.payment.PaymentActivity
 import com.yavin.mybustickets.viewmodel.FinishLoading
 import com.yavin.mybustickets.viewmodel.NoResultFound

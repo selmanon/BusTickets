@@ -3,9 +3,8 @@ package com.yavin.mybustickets.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.yavin.mybustickets.data.TicketDomain
-import com.yavin.mybustickets.data.repository.DefaultTicketsRepository
-import com.yavin.mybustickets.data.repository.TicketsRepository
+import com.yavin.mybustickets.domaine.TicketDomain
+import com.yavin.mybustickets.domaine.repository.TicketsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

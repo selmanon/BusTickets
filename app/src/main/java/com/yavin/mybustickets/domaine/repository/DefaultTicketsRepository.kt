@@ -1,7 +1,7 @@
-package com.yavin.mybustickets.data.repository
+package com.yavin.mybustickets.domaine.repository
 
-import com.yavin.mybustickets.data.TicketDomain
-import com.yavin.mybustickets.data.TicketType
+import com.yavin.mybustickets.domaine.TicketDomain
+import com.yavin.mybustickets.domaine.TicketType
 import com.yavin.mybustickets.db.dao.TicketDao
 import com.yavin.mybustickets.di.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher

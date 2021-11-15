@@ -8,10 +8,9 @@ import android.widget.TextView
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.RecyclerView
 import com.yavin.mybustickets.R
-import com.yavin.mybustickets.data.TicketDomain
-import com.yavin.mybustickets.data.TicketType
+import com.yavin.mybustickets.domaine.TicketDomain
+import com.yavin.mybustickets.domaine.TicketType
 import java.text.NumberFormat
-import java.time.DayOfWeek
 import java.util.*
 
 class SettingTicketPriceAdapter : RecyclerView.Adapter<SettingTicketPriceAdapter.TicketViewHolder>() {
