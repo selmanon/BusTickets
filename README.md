@@ -14,16 +14,6 @@
 **LiveData** is a simple observable data holder class that is also lifecycle-aware. New values are only dispatched to observers when their lifecycle is at least in the STARTED (visible) state, and observers are unregistered automatically which is handy to avoid memory leaks. LiveData is useful to allow _Caching_ and _Avoid background work_: it caches the latest value of the data it holds and that value is automatically dispatched to new observers. Plus, it is notified when there are no more registered observers in the STARTED state, which allows to avoid performing unnecessary background work.
 
 
-# Clean architecture layers:
-
-**Presentation Layer** contains UI (Activities & Fragments) that are coordinated by Presenters/ViewModels which execute 1 or multiple Use cases. 
-
-**Presentation Layer** depends on Domain Layer.
-
-**Domain Layer** is the most INNER part of the onion (no dependencies with other layers) and it contains Entities, Use cases & Repository Interfaces. Use cases combine data from 1 or multiple Repository Interfaces.
-Data Layer contains Repository Implementations and 1 or multiple Data Sources. Repositories are responsible to coordinate data from the different Data Sources. Data Layer depends on Domain Layer.
-
-
 # Repository Pattern Design:
 
 ![Repository Pattern Design](https://miro.medium.com/max/2260/1*xxr1Idc8UoNELOzqXcJnag.png)
